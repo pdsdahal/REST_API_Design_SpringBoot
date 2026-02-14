@@ -40,7 +40,7 @@ public class ProductController {
 	// Day 1: Add product
 	@PostMapping
 	public ResponseEntity<Product> addProduct(@RequestBody @Valid ProductRequest request) {
-		Product p = new Product(null, request.getName(), request.getPrice(), request.getQuantity());
+		Product p = new Product(request.getName(), request.getPrice(), request.getQuantity());
 		return ResponseEntity.ok(productService.addProduct(p));
 	}
 
@@ -68,7 +68,7 @@ public class ProductController {
 	// Day 3: Update product
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateProductById(@PathVariable Long id, @RequestBody @Valid ProductRequest request) {
-		Product product = new Product(null, request.getName(), request.getPrice(), request.getQuantity());
+		Product product = new Product(request.getName(), request.getPrice(), request.getQuantity());
 		Product upProduct = productService.updateProduct(id, product);
 		if (upProduct == null) {
 			return ResponseEntity.status(404).body("Product not found");
